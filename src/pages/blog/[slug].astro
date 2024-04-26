@@ -1,0 +1,32 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const title = post.data.title;
+---
+
+<Layout title={title}>
+  <h1>{title}</h1>
+  <p>
+    <time datetime={post.data.date.toString()}>
+      📅 {formatDate(post.data.date)}
+    </time>
+  </p>
+  <Content />
+</Layout>

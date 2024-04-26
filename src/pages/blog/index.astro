@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils";
+
+const allBlogPosts = await getCollection("blog");
+const sortedBlogPosts = allBlogPosts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const title = "🖋️ Blog";
+---
+
+<Layout title={title}>
+  <section class="space-y-4">
+    {
+      sortedBlogPosts.map((post) => (
+        <article>
+          <time datetime={post.data.date.toString()}>
+            {formatDate(post.data.date)}
+          </time>
+          <span class="mx-2">---</span>
+          <a href={`/blog/${post.slug}`}> {post.data.title}</a>
+        </article>
+      ))
+    }
+  </section>
+</Layout>
