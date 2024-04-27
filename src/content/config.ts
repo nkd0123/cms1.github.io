@@ -1,5 +1,5 @@
 import { z, defineCollection } from "astro:content";
-import { ProjectStatus } from "../pages/projects/projects.i";
+
 
 const blogCollection = defineCollection({
   schema: z.object({
