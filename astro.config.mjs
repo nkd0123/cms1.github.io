@@ -17,10 +17,14 @@ export default defineConfig({
     }),
     NetlifyCMS({
         config: {
-          backend: {
-            name: 'git-gateway',
-            branch: 'main',
-          },
+          backend: import.meta.env.PROD
+          ? {
+              name: "github",
+              repo: "nkd0123/cms1",
+            }
+          : {
+              name: "git-gateway",
+            },
           collections: [
             {
               name: 'posts',
