@@ -6,6 +6,7 @@ import NetlifyCMS from 'astro-netlify-cms';
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://cms1.github.io ",
   markdown: {
     shikiConfig: {
       theme: "monokai",
@@ -20,7 +21,7 @@ export default defineConfig({
           backend: import.meta.env.PROD
           ? {
               name: "github",
-              repo: "nkd0123/cms1",
+              repo: "nkd0123/cms1.github.io",
             }
           : {
               name: "git-gateway",
